@@ -1,0 +1,24 @@
+config:
+  target: "ws://gwm-edge-server-831020479.eu-west-1.elb.amazonaws.com/gwm?x-identity-id="
+  scriptTarget: "registerUser"
+  phases:
+    -
+      duration: 60
+      arrivalRate: 5
+  processor: "./my_functions.js"
+
+  ws:
+    # Ignore SSL certificate errors
+    # - useful in *development* with self-signed certs
+    rejectUnauthorized: false
+scenarios:
+  -
+    engine: "ws"
+    flow:
+      -
+        loop:
+          -
+            send: '{"code": "HeartBeat", "data": "{\"Payload\":\"237.2498\"}"}'
+          -
+            think: 10
+        count: 50
