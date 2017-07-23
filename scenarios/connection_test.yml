@@ -3,8 +3,8 @@ config:
   scriptTarget: "registerUser"
   phases:
     -
-      duration: 60
-      arrivalRate: 5
+      duration: 360
+      arrivalRate: 10
   processor: "./my_functions.js"
 
   ws:
@@ -21,4 +21,15 @@ scenarios:
             send: '{"code": "HeartBeat", "data": "{\"Payload\":\"237.2498\"}"}'
           -
             think: 10
-        count: 50
+        count: 6
+      -
+        send: '{"code": "SearchPlayersRequest", "data": "{\"ArenaId\":\"minsk\"}"}'
+      -
+        think: 20
+      -
+        loop:
+          -
+            send: '{"code": "HeartBeat", "data": "{\"Payload\":\"237.2498\"}"}'
+          -
+            think: 10
+        count: 300
