@@ -1,10 +1,11 @@
 config:
   target: "ws://gwm-edge-server-831020479.eu-west-1.elb.amazonaws.com/gwm?x-identity-id="
   scriptTarget: "registerUser"
+  receiveHandler: "receiveHandler"
   phases:
     -
-      duration: 360
-      arrivalRate: 10
+      duration: 60
+      arrivalRate: 1
   processor: "./my_functions.js"
 
   ws:
@@ -21,7 +22,7 @@ scenarios:
             send: '{"code": "HeartBeat", "data": "{\"Payload\":\"237.2498\"}"}'
           -
             think: 10
-        count: 6
+        count: 1
       -
         send: '{"code": "SearchPlayersRequest", "data": "{\"ArenaId\":\"minsk\"}"}'
       -
